@@ -1,6 +1,8 @@
+import './signup.css'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import './signup.css'
+import axios from 'axios'
+
 const Login = () => {
   const [FormData, setFormData] = useState();
 
@@ -8,14 +10,20 @@ const Login = () => {
     setFormData({...FormData,[e.target.name]:e.target.value});
   }
 
-  const handleClick = () => {
-    
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const data = { username: FormData.username, password: FormData.password }
+      const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/login`, data)
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
     <div>
       <div className="main">
-        <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
           <form >
             <label htmlFor="chk" aria-hidden="true">Login</label>
@@ -24,7 +32,6 @@ const Login = () => {
             <button onClick={handleClick}>Login</button>
           </form>
         </div>
-
         <div className="login">
           <label htmlFor="chk" aria-hidden="true"><Link to="/signup">Sign up</Link> </label>
         </div>

@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
 const cookieParser=require('cookie-parser')
+const cors=require('cors')
 const PORT = process.env.PORT || 5000;
 
 // Databadse connection
 const connectDB = require('./db');
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

@@ -1,25 +1,51 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
 import './signup.css'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { errorToast, successToast } from '../Helper/Toster'
+
 const Signup = () => {
-  const [FormData, setFormData] = useState();
+  const [FormData, setFormData] = useState({});
+
+  const Navigate = useNavigate();
 
   const handlechange = (e) => {
     setFormData({ ...FormData, [e.target.name]: e.target.value });
   }
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      const data = { username: FormData.username, password: FormData.password }
-
-      const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/signup`,data)
-      
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (!FormData.username && !FormData.password){
+      errorToast("All fields are required.")
+    }else if(!FormData.username){
+      e.preventDefault();
+      errorToast("Username is required")
     }
+    else if (!FormData.password) {
+      e.preventDefault();
+      errorToast("Password is Required")
+    } 
+    else if (!FormData.cpassword) {
+      e.preventDefault();
+      errorToast("confirm Password is Required")
+    } 
+    else if (FormData.password !== FormData.cpassword) {
+      e.preventDefault();
+      errorToast('password and confirm password must be same.')
+    } 
+    else{
+      try {
+        e.preventDefault();
+        const data = { username: FormData.username, password: FormData.password }
+          const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/signup`, data)
+          Navigate('/login')
+          successToast(response.data)
+      } catch (error) {
+        Navigate('/signup')
+        console.log(error);
+        errorToast(error.response.data)
+      }
+    }
+   
   }
 
   return (
@@ -28,9 +54,9 @@ const Signup = () => {
         <div className="signup">
           <form>
             <label htmlFor="chk" aria-hidden="true">Sign up</label>
-            <input type="text" name="username" placeholder="Email / phone" required="true" onChange={handlechange} />
-            <input type="password" name="password" placeholder="Password" required="true" onChange={handlechange} />
-            <input type="password" name="cpassword" placeholder="confirm Password" required="true" onChange={handlechange} />
+            <input type="text" name="username" placeholder="Email / phone" required onChange={handlechange} />
+            <input type="password" name="password" placeholder="Password" required onChange={handlechange} />
+            <input type="password" name="cpassword" placeholder="confirm Password" required onChange={handlechange} />
             <button onClick={handleClick}>Sign up</button>
           </form>
         </div>

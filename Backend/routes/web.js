@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
 
         const isexist = await User.findOne({username})
         if (isexist) {
-            return res.status(200).json({ error: 'user already exist' })
+            return res.status(400).json({ error: 'user already exist' })
         }
 
         // save user in DB
@@ -61,7 +61,7 @@ router.post('/login',async (req, res) => {
         const authToken = jwt.sign(data, process.env.JWT_SECRET)
         return res.cookie("authToken", authToken, {
             httpOnly: true,
-        }).status(200).json({ message: "Logged in successfully" });
+        }).status(200).json({ accessToken: authToken , success:"Loggedin Sucessfully" });
 
     } catch (error) {
         console.log({ 'error': error.message })

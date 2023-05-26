@@ -58,13 +58,13 @@ router.post('/login',async (req, res) => {
                 id: user.id
             }
         }
-        const authToken = jwt.sign(data, process.env.JWT_SECRET)
+        const authToken = jwt.sign(data, process.env.JWT_SECRET, { expiresIn: '1d' })
         return res.cookie("authToken", authToken, {
             httpOnly: true,
         }).status(200).json({ accessToken: authToken , success:"Loggedin Sucessfully" });
 
     } catch (error) {
-        console.log({ 'error': error.message })
+        console.log({ 'error': error })
         res.status(500).send({ error: 'something went wrong' })
     }
     

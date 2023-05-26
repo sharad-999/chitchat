@@ -1,3 +1,4 @@
+import './signup.css'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -9,15 +10,14 @@ const Login = () => {
 
   const [FormData, setFormData] = useState();
 
+  const Navigate = useNavigate();
+
   useEffect(() => {
     if(cookies.get('jwt')){
       Navigate('/')
     }
     // eslint-disable-next-line
   }, [])
-  
-
-  const Navigate = useNavigate();
 
   const handlechange = (e) => {
     setFormData({ ...FormData, [e.target.name]: e.target.value });
@@ -27,6 +27,7 @@ const Login = () => {
     e.preventDefault();
     if (!FormData.username && !FormData.password){
       errorToast("All fields are required")
+
     }else if(!FormData.username){
       // e.preventDefault();
       errorToast("Username is required")
@@ -42,7 +43,7 @@ const Login = () => {
         if (response.data.accessToken) {
           // Set cookies
           let d = new Date();
-          d.setTime(d.getTime() + (30 * 60 * 5000)); //30 minutes
+          d.setTime(d.getTime() + (30 * 60 * 1000)); //30 minutes
           cookies.set('jwt', response.data.accessToken, { path: "/", expires: d })
 
           Navigate('/');
@@ -56,14 +57,14 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className='ls'>
       <div className="main">
         <div className="signup">
           <form >
             <label htmlFor="chk" aria-hidden="true">Login</label>
-            <input type="text" name="username" placeholder="Email / phone" required onChange={handlechange} />
-            <input type="password" name="password" placeholder="Password" required onChange={handlechange} />
-            <button onClick={handleClick}>Login</button>
+            <input className='input' type="text" name="username" placeholder="Email / phone" required onChange={handlechange} />
+            <input className='input' type="password" name="password" placeholder="Password" required onChange={handlechange} />
+            <button className='button'  onClick={handleClick}>Login</button>
           </form>
         </div>
         <div className="login">

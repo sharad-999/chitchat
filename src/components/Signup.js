@@ -49,15 +49,15 @@ const Signup = () => {
   }
 
   return (
-    <div>
+    <div className='ls'>
       <div className="main">
         <div className="signup">
           <form>
             <label htmlFor="chk" aria-hidden="true">Sign up</label>
-            <input type="text" name="username" placeholder="Email / phone" required onChange={handlechange} />
-            <input type="password" name="password" placeholder="Password" required onChange={handlechange} />
-            <input type="password" name="cpassword" placeholder="confirm Password" required onChange={handlechange} />
-            <button onClick={handleClick}>Sign up</button>
+            <input className='input' type="text" name="username" placeholder="Email / phone" required onChange={handlechange} />
+            <input className='input' type="password" name="password" placeholder="Password" required onChange={handlechange} />
+            <input className='input'type="password" name="cpassword" placeholder="confirm Password" required onChange={handlechange} />
+            <button className='button' onClick={handleClick}>Sign up</button>
           </form>
         </div>
 

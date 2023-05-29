@@ -2,6 +2,7 @@ import '../asset/css/messages.css'
 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { errorToast } from '../Helper/Toster';
 
 const Messages = ({inputvalue,user}) => {
 
@@ -10,9 +11,13 @@ const Messages = ({inputvalue,user}) => {
 
     useEffect(() => {
         if(inputvalue){
-            axios.post(`${process.env.REACT_APP_HOST_URL}/chat`, { inputvalue,user})
-            .then(res=>{setans(res.data.answer); console.log('res', res.data.answer)})
-            .catch(err=>console.log('err', err))
+            if(notes.length===5){
+                errorToast("You Reached your Trial limit")
+            }else{
+                axios.post(`${process.env.REACT_APP_HOST_URL}/chat`, { inputvalue,user})
+                .then(res=>{setans(res.data.answer); console.log('res', res.data.answer)})
+                .catch(err=>console.log('err', err))
+            }
         }
     }, [user,inputvalue])
 

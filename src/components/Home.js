@@ -63,6 +63,7 @@ const Home = () => {
       <div className="chat-app">
         <div className="sidebar">
           <button className="new-chat-btn">+ New Chat</button>
+          <button className="new-chat-btn" onClick={handleLogout}>Refresh limit</button>
           <button className="logout new-chat-btn" onClick={handleLogout}>Logout</button>
         </div>
         <div className="chat-container">

@@ -46,21 +46,26 @@ router.post('/chat',async(req,res)=>{
         max_tokens:70,
         temperature: 0,
     };
-    // client
-    //     .post("https://api.openai.com/v1/completions", params)
-    //     .then(async(completion) => {
-    //         console.log(completion.data.choices[0].text);
-    //         res.send({ ans: completion.data.choices[0].text });
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-    const chat = await Chat.create({ 
-        user: user._id,
-        question: inputvalue,
-        answer:  Math.random()
-    })
-    res.json({answer:chat.answer})
+    client
+        .post("https://api.openai.com/v1/completions", params)
+        .then(async(completion) => {
+            console.log(completion.data.choices[0].text);
+            const chat = await Chat.create({ 
+                user: user._id,
+                question: inputvalue,
+                answer: completion.data.choices[0].text
+            })
+            res.json({ answer: completion.data.choices[0].text });
+        })
+        .catch(async(err) => {
+            const chat = await Chat.create({
+                user: user._id,
+                question: inputvalue,
+                answer: Math.random()
+            })
+            res.json({ answer: chat.answer});
+            console.log(err);
+        });
     // try {
     //     const completion=await openai.createChatCompletion({
     //         model: "gpt-3.5-turbo",  

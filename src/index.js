@@ -11,7 +11,8 @@ root.render(
     <App />
     <Toaster 
       toastOptions={{
-      duration: 1500
+      duration: 1500,
+      // position:'top-right' 
       }}
       />
   </>

@@ -1,4 +1,4 @@
-import './signup.css'
+import '../asset/css/signup.css'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'

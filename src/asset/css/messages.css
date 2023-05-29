@@ -1,0 +1,10 @@
+.message-user{
+    background-color: #343541;
+    padding-top: 30px;
+    color: #ffffff;
+    margin-top: 5px;
+}
+.message-ai{
+    background-color: #444654;
+    color: #ffffff;
+}

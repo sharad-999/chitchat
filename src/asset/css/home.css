@@ -1,6 +1,6 @@
 .chat-app {
     display: flex;
-    height: 100vh;
+    height: 97.5vh;
 }
 
 .sidebar {
@@ -28,14 +28,16 @@
     justify-content: center;
     padding: 10px;
     width: 100%;
-    position: relative;
+    position: absolute;
+    bottom: 2px;
+    /* margin-top: 550px; */
 }
 
 .chat_input {
     height:40px;
     width: 90%;
     padding: 5px;
-    background-color: #40414f;
+    background-color: #3b3c48;
     border: none;
     border-radius: 5px;
     /* Add any additional styling for the input field */
@@ -49,12 +51,26 @@
     cursor: pointer;
     position: absolute;
     right: 6%;
-   
 }
 
 .chat-container {
     flex-grow: 1;
     background-color: #444654;
     height: 100%;
+    position: relative;
     /* Add any additional styling for the chat container */
 }   
+
+
+/* ==>>>New design<<<== */
+
+.chat_message{
+    height: 82vh;
+    position: relative;
+    overflow: auto;
+}
+
+.logout{
+    margin-top: 83vh;
+    text-align: center;
+}

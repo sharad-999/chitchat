@@ -94,4 +94,14 @@ router.post('/fetchchat',async(req,res)=>{
     }
 })
 
+router.patch('/refreshlimit',async(req,res)=>{
+    const user = req.body.user;
+    try {
+        const updateduser=await User.findByIdAndUpdate(user._id,{limit:user.limit+5});
+        return res.json({success:"Your Limit increased.",user:updateduser})
+    } catch (error) {
+        console.log('error', error)
+    }
+})
+
 module.exports = router;

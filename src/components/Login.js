@@ -46,7 +46,7 @@ const Login = () => {
           d.setTime(d.getTime() + (30 * 60 * 1000)); //30 minutes
           cookies.set('jwt', response.data.accessToken, { path: "/", expires: d })
 
-          Navigate('/');
+          Navigate('/',{state:{hidden:false}});
           successToast(response.data.success);
         }
       } catch (error) {

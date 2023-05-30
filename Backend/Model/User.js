@@ -9,6 +9,10 @@ const UserSchema=new mongoose.Schema({
         type:String,
         length:{min:8},
         require:true
+    },
+    limit:{
+        type:Number,
+        default:5
     }
 },{ timestamps: true });
 

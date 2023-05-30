@@ -70,7 +70,11 @@
     overflow: auto;
 }
 
+.limit{
+    color: #ffffff;
+}
+
 .logout{
-    margin-top: 78vh;
+    margin-top: 74vh;
     text-align: center;
 }

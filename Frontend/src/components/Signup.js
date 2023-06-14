@@ -14,38 +14,38 @@ const Signup = () => {
   }
 
   const handleClick = async (e) => {
-    if (!FormData.username && !FormData.password){
+    if (!FormData.username && !FormData.password) {
       errorToast("All fields are required.")
-    }else if(!FormData.username){
+    } else if (!FormData.username) {
       e.preventDefault();
       errorToast("Username is required")
     }
     else if (!FormData.password) {
       e.preventDefault();
       errorToast("Password is Required")
-    } 
+    }
     else if (!FormData.cpassword) {
       e.preventDefault();
       errorToast("confirm Password is Required")
-    } 
+    }
     else if (FormData.password !== FormData.cpassword) {
       e.preventDefault();
       errorToast('password and confirm password must be same.')
-    } 
-    else{
+    }
+    else {
       try {
         e.preventDefault();
         const data = { username: FormData.username, password: FormData.password }
-          const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/signup`, data)
-          Navigate('/login')
-          successToast(response.data)
+        const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/signup`, data)
+        successToast("Signup successfully!")
+        Navigate('/login')
       } catch (error) {
         Navigate('/signup')
         console.log(error);
         errorToast(error.response.data)
       }
     }
-   
+
   }
 
   return (
@@ -56,7 +56,7 @@ const Signup = () => {
             <label htmlFor="chk" aria-hidden="true">Sign up</label>
             <input className='input' type="text" name="username" placeholder="Email / phone" required onChange={handlechange} />
             <input className='input' type="password" name="password" placeholder="Password" required onChange={handlechange} />
-            <input className='input'type="password" name="cpassword" placeholder="confirm Password" required onChange={handlechange} />
+            <input className='input' type="password" name="cpassword" placeholder="confirm Password" required onChange={handlechange} />
             <button className='button' onClick={handleClick}>Sign up</button>
           </form>
         </div>

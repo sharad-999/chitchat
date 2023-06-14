@@ -5,7 +5,7 @@ import axios from 'axios';
 import { errorToast } from '../Helper/Toster';
 import {  useNavigate } from 'react-router-dom';
 
-const Messages = ({inputvalue,user,limit}) => {
+const Messages = ({inputvalue,usr,limit}) => {
 
     const [notes,setnotes]=useState([]);
     const [ans, setans] = useState()
@@ -13,7 +13,7 @@ const Messages = ({inputvalue,user,limit}) => {
 
     useEffect(() => {
         if(inputvalue){
-                axios.post(`${process.env.REACT_APP_HOST_URL}/chat`, { inputvalue,user})
+                axios.post(`${process.env.REACT_APP_HOST_URL}/chat`, { inputvalue,usr})
                 .then(res=>{
                     setans(res.data.answer);
                     console.log('note.length', notes.length)
@@ -28,17 +28,17 @@ const Messages = ({inputvalue,user,limit}) => {
                 Navigate('/',{state:{hidden:false}})
         }
         // eslint-disable-next-line
-    }, [user,inputvalue])
+    }, [usr,inputvalue])
 
     useEffect(() => {   
-        if (user) {
-            axios.post(`${process.env.REACT_APP_HOST_URL}/fetchchat`, { user })
+        if (usr) {
+            axios.post(`${process.env.REACT_APP_HOST_URL}/fetchchat`, { usr })
                 .then(response =>{ 
                     setnotes(response.data.notes);
                 })
                 .catch(err => console.log('err', err))
         }
-    }, [user,ans])
+    }, [usr,ans])
     
     return (
     <div>

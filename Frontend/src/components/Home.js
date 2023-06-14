@@ -19,15 +19,16 @@ const Home = () => {
   const ref = useRef()
   const Navigate = useNavigate();
   const location=useLocation();
-  console.log('limit', limit)
-  console.log('location', location)
+  // console.log('limit', limit)
+  // console.log('location', location)
 
   useEffect(() => {
     if (!cookies.get('jwt')) {
+      console.log('jwt not found');
       Navigate('/login')
       errorToast('plase Login to Access.')
-
     } else {
+      console.log('jwt not found');
       const validateToken = () => {
         const authToken = cookies.get('jwt');
         axios.post(`${process.env.REACT_APP_HOST_URL}/verifytoken`, { authToken })
@@ -88,7 +89,7 @@ const Home = () => {
             {
               <Messages 
                   inputvalue={prompt}
-                  user={user}
+                  usr={"rfr"}
                   limit={limit}
                 />
             }
@@ -101,7 +102,7 @@ const Home = () => {
               className="chat_input"
               placeholder="Send a message..."
               onChange={handleOnchange}
-              disabled={location.state.hidden}
+              disabled={location?.state?.hidden}
             />
             <button className="send-btn" onClick={hanldeOnclick} disabled={input?.length > 0 ? false : true}><BsSend /></button>
           </div>

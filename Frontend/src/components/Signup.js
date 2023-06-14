@@ -36,7 +36,7 @@ const Signup = () => {
       try {
         e.preventDefault();
         const data = { username: FormData.username, password: FormData.password }
-        const response = await axios.post(`${process.env.REACT_APP_HOST_URL}/signup`, data)
+        await axios.post(`${process.env.REACT_APP_HOST_URL}/signup`, data);
         successToast("Signup successfully!")
         Navigate('/login')
       } catch (error) {

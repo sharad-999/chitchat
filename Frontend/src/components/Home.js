@@ -24,16 +24,14 @@ const Home = () => {
 
   useEffect(() => {
     if (!cookies.get('jwt')) {
-      console.log('jwt not found');
       Navigate('/login')
       errorToast('plase Login to Access.')
     } else {
-      console.log('jwt not found');
       const validateToken = () => {
         const authToken = cookies.get('jwt');
         axios.post(`${process.env.REACT_APP_HOST_URL}/verifytoken`, { authToken })
           .then(response => {
-            successToast(response.data.success);
+            // successToast(response.data.success);
             setuser(response.data.user)
             setlimit(response.data.user.limit)
           })
@@ -89,7 +87,7 @@ const Home = () => {
             {
               <Messages 
                   inputvalue={prompt}
-                  usr={"rfr"}
+                  user={user}
                   limit={limit}
                 />
             }
